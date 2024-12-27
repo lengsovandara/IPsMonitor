@@ -4,7 +4,7 @@ import os
 import socket
 
 # List of IPs to monitor
-IPS_NAME_MONITOR = ["DC_EZECOM","DC_NTC","DC_SINET","DC_MEKONG","DR_MEKONG"]
+ISP_NAME_MONITOR = ["DC_EZECOM","DC_NTC","DC_SINET","DC_MEKONG","DR_MEKONG"]
 IPS_TO_MONITOR = ["110.74.212.129","202.124.33.129","136.228.128.1","100.65.0.3","100.65.0.4"]
 
 # Telegram bot details
@@ -49,10 +49,11 @@ def main():
         return
 
     for ip in IPS_TO_MONITOR:
-        if not is_reachable(ip):
-            message = f"⚠️ Alert: IP {ip} is unreachable!"
-            print(message)  # Log message to console
-            send_telegram_message(message)
+        for isp in ISP_NAME_MONITOR:
+            if not is_reachable(ip):
+                message = f"⚠️ Alert: {isp} IP {ip} is unreachable!"
+                print(message)  # Log message to console
+                send_telegram_message(message)
 
 if __name__ == "__main__":
     main()
