@@ -1,6 +1,7 @@
 import subprocess
 import requests
 import os
+import socket
 
 # List of IPs to monitor
 IPS_TO_MONITOR = ["8.8.8.8", "1.1.1.1","192.168.1.10","110.74.212.129"]
