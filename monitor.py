@@ -28,17 +28,6 @@ def is_reachable(ip):
         return True  # If nslookup succeeds, the IP is reachable
     except subprocess.CalledProcessError:
         return False  # If nslookup fails, the IP is unreachable
-        
-#def is_reachable(ip, port=80):
-#    """
-#    Check if the IP is reachable by attempting a TCP connection on the specified port (default is 80).
-#    """
-#    try:
-#        sock = socket.create_connection((ip, port), timeout=5)
-#        sock.close()
-#        return True
-#    except (socket.timeout, socket.error):
-#        return False
 
 def send_telegram_message(message):
     """
