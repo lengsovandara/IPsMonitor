@@ -8,8 +8,6 @@ IPS_TO_MONITOR = ["8.8.8.8", "1.1.1.1","192.168.1.10","110.74.212.129"]
 # Telegram bot details
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")  # Load from environment variable
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")      # Load from environment variable
-#TELEGRAM_BOT_TOKEN = "7599220977:AAFN5IW6VPgU4bVRVvfYXCOwGlruHDXkcVQ"
-#TELEGRAM_CHAT_ID = "-4770635821"
 
 if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
     raise EnvironmentError("TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID is not set in the environment.")
@@ -20,7 +18,7 @@ def is_reachable(ip):
     """
     try:
         # Send 1 ping request (-c 1) with a 1-second timeout
-        subprocess.run(["ping", "1", "-W", "1", ip], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        subprocess.run(["ping", ip], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         return True
     except subprocess.CalledProcessError:
         return False
