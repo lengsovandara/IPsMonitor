@@ -13,16 +13,32 @@ TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")      # Load from environment va
 if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
     raise EnvironmentError("TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID is not set in the environment.")
 
-def is_reachable(ip, port=80):
+def is_reachable(ip):
     """
-    Check if the IP is reachable by attempting a TCP connection on the specified port (default is 80).
+    Check if the IP is reachable using nslookup (DNS lookup).
     """
     try:
-        sock = socket.create_connection((ip, port), timeout=5)
-        sock.close()
-        return True
-    except (socket.timeout, socket.error):
-        return False
+        # Execute nslookup to check if the DNS server is responding
+        result = subprocess.run(
+            ["nslookup", ip],
+            check=True,  # Raise error if nslookup fails
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+        )
+        return True  # If nslookup succeeds, the IP is reachable
+    except subprocess.CalledProcessError:
+        return False  # If nslookup fails, the IP is unreachable
+        
+#def is_reachable(ip, port=80):
+#    """
+#    Check if the IP is reachable by attempting a TCP connection on the specified port (default is 80).
+#    """
+#    try:
+#        sock = socket.create_connection((ip, port), timeout=5)
+#        sock.close()
+#        return True
+#    except (socket.timeout, socket.error):
+#        return False
 
 def send_telegram_message(message):
     """
