@@ -19,11 +19,6 @@ jobs:
 
       - name: Install Dependencies
         run: pip install requests
-      - name: Test Connectivity
-        run: |
-          ping -c 4 8.8.8.8 || echo "Ping failed"
-          curl -I http://1.1.1.1 || echo "HTTP failed"
-          nc -zv 1.1.1.1 80 || echo "TCP test failed"
       - name: Run IP Monitor
         env:  # Pass secrets as environment variables
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
