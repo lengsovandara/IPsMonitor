@@ -12,15 +12,15 @@ TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")      # Load from environment va
 if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
     raise EnvironmentError("TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID is not set in the environment.")
 
-def is_reachable(ip):
+def is_reachable(ip, port=80):
     """
-    Check if the IP is reachable using ping.
+    Check if the IP is reachable by attempting a TCP connection on the specified port (default is 80).
     """
     try:
-        # Send 1 ping request (-c 1) with a 1-second timeout
-        subprocess.run(["ping", ip], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        sock = socket.create_connection((ip, port), timeout=5)
+        sock.close()
         return True
-    except subprocess.CalledProcessError:
+    except (socket.timeout, socket.error):
         return False
 
 def send_telegram_message(message):
