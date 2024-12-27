@@ -19,7 +19,10 @@ jobs:
 
       - name: Install Dependencies
         run: pip install requests
-
+      - name: Test Connectivity
+        run: |
+          ping -c 1 1.1.1.1 || echo "1.1.1.1 is unreachable"
+          curl -I http://1.1.1.1 || echo "HTTP to 1.1.1.1 failed"
       - name: Run IP Monitor
         env:  # Pass secrets as environment variables
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
