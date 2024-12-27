@@ -1,12 +1,13 @@
 import subprocess
 import requests
+import os
 
 # List of IPs to monitor
 IPS_TO_MONITOR = ["8.8.8.8", "1.1.1.1"]
 
 # Telegram bot details
-TELEGRAM_BOT_TOKEN = "bot7599220977:AAFN5IW6VPgU4bVRVvfYXCOwGlruHDXkcVQ"
-TELEGRAM_CHAT_ID = "-4770635821"
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
 def is_reachable(ip):
     try:
