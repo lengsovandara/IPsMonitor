@@ -6,8 +6,10 @@ import os
 IPS_TO_MONITOR = ["8.8.8.8", "1.1.1.1","192.168.1.10"]
 
 # Telegram bot details
-TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")  # Load from environment variable
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")      # Load from environment variable
+#TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")  # Load from environment variable
+#TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")      # Load from environment variable
+TELEGRAM_BOT_TOKEN = "7599220977:AAFN5IW6VPgU4bVRVvfYXCOwGlruHDXkcVQ"
+TELEGRAM_CHAT_ID = "-4770635821"
 
 def is_reachable(ip):
     """
