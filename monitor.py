@@ -50,7 +50,7 @@ def main():
         
     i = 0
     while i < len(IPS_TO_MONITOR):
-        if not is_reachable(ip):
+        if not is_reachable(IPS_TO_MONITOR[i]):
             message = f"⚠️ Alert: {ISP_NAME_MONITOR[i]} IP {IPS_TO_MONITOR[i]} is unreachable!"
             print(message)  # Log message to console        
             send_telegram_message(message)
