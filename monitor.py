@@ -20,7 +20,7 @@ def is_reachable(ip):
     """
     try:
         # Send 1 ping request (-c 1) with a 1-second timeout
-        subprocess.run(["ping", "-c", "1", "-W", "1", ip], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        subprocess.run(["ping", "1", "-W", "1", ip], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         return True
     except subprocess.CalledProcessError:
         return False
