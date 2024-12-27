@@ -4,7 +4,7 @@ import os
 import socket
 
 # List of IPs to monitor
-IPS_NAME_MONITOR = ["DC_EZECOM","DC_NTC","DC_SINET","DC_MEKONG"]
+IPS_NAME_MONITOR = ["DC_EZECOM","DC_NTC","DC_SINET","DC_MEKONG","DR_MEKONG"]
 IPS_TO_MONITOR = ["110.74.212.129","202.124.33.129","136.228.128.1","100.65.0.3","100.65.0.4"]
 
 # Telegram bot details
