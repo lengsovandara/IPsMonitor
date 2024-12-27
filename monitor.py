@@ -3,7 +3,7 @@ import requests
 import os
 
 # List of IPs to monitor
-IPS_TO_MONITOR = ["8.8.8.8", "1.1.1.1"]
+IPS_TO_MONITOR = ["8.8.8.8", "1.1.1.1","192.168.1.10"]
 
 # Telegram bot details
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
