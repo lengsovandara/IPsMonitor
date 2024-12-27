@@ -6,22 +6,43 @@ import os
 IPS_TO_MONITOR = ["8.8.8.8", "1.1.1.1","192.168.1.10"]
 
 # Telegram bot details
-TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")  # Load from environment variable
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")      # Load from environment variable
 
 def is_reachable(ip):
+    """
+    Check if the IP is reachable using ping.
+    """
     try:
-        # Ping the IP
-        subprocess.check_output(["ping", "-c", "1", ip], stderr=subprocess.STDOUT)
+        # Send 1 ping request (-c 1) with a 1-second timeout
+        subprocess.run(["ping", "-c", "1", "-W", "1", ip], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         return True
     except subprocess.CalledProcessError:
         return False
 
 def send_telegram_message(message):
+    """
+    Send a message to a Telegram chat using the Telegram bot.
+    """
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
     payload = {"chat_id": TELEGRAM_CHAT_ID, "text": message}
-    requests.post(url, data=payload)
+    response = requests.post(url, data=payload)
+    if response.status_code != 200:
+        print(f"Failed to send Telegram message: {response.text}")
 
-for ip in IPS_TO_MONITOR:
-    if not is_reachable(ip):
-        send_telegram_message(f"⚠️ IP {ip} is unreachable!")
+def main():
+    """
+    Monitor the IPs and send an alert if any IP is unreachable.
+    """
+    if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
+        print("Error: Telegram bot token or chat ID not set.")
+        return
+
+    for ip in IPS_TO_MONITOR:
+        if not is_reachable(ip):
+            message = f"⚠️ Alert: IP {ip} is unreachable!"
+            print(message)  # Log message to console
+            send_telegram_message(message)
+
+if __name__ == "__main__":
+    main()
