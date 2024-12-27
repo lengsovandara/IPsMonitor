@@ -48,12 +48,11 @@ def main():
         print("Error: Telegram bot token or chat ID not set.")
         return
 
-    for ip in IPS_TO_MONITOR:
-        for isp in ISP_NAME_MONITOR:
-            if not is_reachable(ip):
-                message = f"⚠️ Alert: {isp} IP {ip} is unreachable!"
-                print(message)  # Log message to console
-                send_telegram_message(message)
+    for ip in IPS_TO_MONITOR:        
+        if not is_reachable(ip):
+            message = f"⚠️ Alert: IP {ip} is unreachable!"
+            print(message)  # Log message to console
+            send_telegram_message(message)
 
 if __name__ == "__main__":
     main()
