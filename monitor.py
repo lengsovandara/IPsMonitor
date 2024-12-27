@@ -4,7 +4,8 @@ import os
 import socket
 
 # List of IPs to monitor
-IPS_TO_MONITOR = ["8.8.8.8", "1.1.1.1","192.168.1.10","110.74.212.129"]
+IPS_NAME_MONITOR = ["DC_EZECOM","DC_NTC","DC_SINET","DC_MEKONG"]
+IPS_TO_MONITOR = ["110.74.212.129","202.124.33.129","136.228.128.1","100.65.0.3","100.65.0.4"]
 
 # Telegram bot details
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")  # Load from environment variable
